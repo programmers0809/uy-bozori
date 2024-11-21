@@ -78,10 +78,10 @@ https://templatemo.com/tm-591-villa-agency
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="{% url "home_page" %}">Home</a></li>
-                      <li><a href="{% url 'properties_page' %}">Properties</a></li>
-                      <li><a href="{% url "detail_page" %}">Property Details</a></li>
-                      <li><a href="{% url "contact_page" %}" class="active">Contact Us</a></li>
+                      <li><a href="{% url 'home_page' %}" class="{% if request.resolver_match.url_name == 'home_page' %}active{% endif %}">Home</a></li>
+                      <li><a href="{% url 'properties_page' %}" class="{% if request.resolver_match.url_name == 'properties_page' %}active{% endif %}">Properties</a></li>
+                      <li><a href="{% url 'detail_page' %}" class="{% if request.resolver_match.url_name == 'detail_page' %}active{% endif %}">Property Details</a></li>
+                      <li><a href="{% url 'contact_page' %}" class="{% if request.resolver_match.url_name == 'contact_page' %}active{% endif %}">Contact Us</a></li>                      
                       <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
                   </ul>   
                     <a class='menu-trigger'>
