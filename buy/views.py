@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views import View
 
-from .models import CategoryModel
+from .models import CategoryModel, HouseModel
 
 class HomeView(View):
     def get(self, request):
@@ -16,10 +16,12 @@ class PropertiesView(View):
     def get(self, request):
         
         category_list = CategoryModel.objects.all()
+        all_house_list = HouseModel.manager.all().order_by('-publish_time')
     
     
         context = {
         'category_list': category_list,
+        'all_house_list': all_house_list,
     }
         return render(request, 'properties.html', context=context)
     
