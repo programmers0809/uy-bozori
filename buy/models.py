@@ -72,3 +72,25 @@ class HouseModel(models.Model):
         return f"{self.category} - {self.address}"
 
 
+
+class CarouselItem(models.Model):
+    location = models.CharField(max_length=100)  # e.g., "Toronto, Canada"
+    category = models.CharField(max_length=100)  # e.g., "Villa", "Penthouse"
+    urgency_text = models.CharField(max_length=100)  # e.g., "Hurry!", "Act Now!"
+    description = models.TextField()  # e.g., "Get the Best Villa for you"
+    background_image = models.ImageField(upload_to='carousel_images/')  # For item background
+
+    def __str__(self):
+        return f"{self.location} - {self.category}"
+
+
+
+
+class Contact(models.Model):
+    phone_number = models.CharField(max_length=20)  # Store phone number
+    email = models.EmailField()  # Store email address
+    phone_icon = models.ImageField(upload_to='contact_icons/', blank=True, null=True)  # Optional: Icon for phone
+    email_icon = models.ImageField(upload_to='contact_icons/', blank=True, null=True)  # Optional: Icon for email
+
+    def __str__(self):
+        return f"Contact Info: {self.phone_number}, {self.email}"

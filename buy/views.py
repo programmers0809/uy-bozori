@@ -2,11 +2,20 @@ from django.shortcuts import render
 
 from django.views import View
 
-from .models import CategoryModel, HouseModel
+from .models import CategoryModel, HouseModel,CarouselItem,Contact
 
-class HomeView(View):
-    def get(self, request):
-        return render(request, 'home.html')
+
+def home(request):
+    carousel_items = CarouselItem.objects.all()
+    all_house_list = HouseModel.objects.all()
+    contact_info = Contact.objects.first()  # Assuming there's one set of contact details
+
+    return render(request, 'home.html', {
+        'carousel_items': carousel_items,
+        'all_house_list': all_house_list,
+        'contact_info': contact_info
+    })
+
     
 class ContactView(View):
     def get(self, request):

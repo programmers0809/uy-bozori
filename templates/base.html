@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{% static 'css/owl.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 <!--
 
 TemplateMo 591 villa agency
@@ -72,17 +74,110 @@ https://templatemo.com/tm-591-villa-agency
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="{% url 'home_page' %}" class="logo">
+                    <a href="{% url 'home' %}" class="logo">
                         <h1>Villa</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="{% url 'home_page' %}" class="{% if request.resolver_match.url_name == 'home_page' %}active{% endif %}">Home</a></li>
+                      <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home_page' %}active{% endif %}">Home</a></li>
                       <li><a href="{% url 'properties_page' %}" class="{% if request.resolver_match.url_name == 'properties_page' %}active{% endif %}">Properties</a></li>
                       <li><a href="{% url 'detail_page' %}" class="{% if request.resolver_match.url_name == 'detail_page' %}active{% endif %}">Property Details</a></li>
                       <li><a href="{% url 'contact_page' %}" class="{% if request.resolver_match.url_name == 'contact_page' %}active{% endif %}">Contact Us</a></li>                      
-                      <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
+                      <li><a href="#" id="schedule-link"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
+
+                      <!-- Kalendar modali -->
+                      <div id="calendar-modal" style="display:none; position: fixed; top: 20%; left: 30%; background: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000;">
+                          <h3>Select a Date</h3>
+                          <input type="date" id="date-picker">
+                          <button id="close-modal">Close</button>
+                      </div>
+                      
+                      <!-- Overlay -->
+                      <div id="modal-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+                   <style>/* Modal oynasi */
+                    #calendar-modal {
+                        display: none; /* Avvaliga yashirin bo'ladi */
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #fff;
+                        padding: 20px 30px;
+                        border-radius: 12px;
+                        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+                        z-index: 1000;
+                        width: 90%;
+                        max-width: 400px;
+                        text-align: center;
+                    }
+                    
+                    /* Modal ichidagi sarlavha */
+                    #calendar-modal h3 {
+                        margin-top: 0;
+                        margin-bottom: 15px;
+                        font-size: 1.5rem;
+                        color: #333;
+                    }
+                    
+                    /* Sana tanlash oynasi */
+                    #date-picker {
+                        width: 100%;
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        margin-bottom: 15px;
+                        box-sizing: border-box;
+                    }
+                    
+                    /* Tugmalar */
+                    #calendar-modal button {
+                        padding: 10px 20px;
+                        background-color: #007BFF;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 1rem;
+                        transition: background-color 0.3s;
+                    }
+                    
+                    #calendar-modal button:hover {
+                        background-color: #0056b3;
+                    }
+                    
+                    /* Overlay (fonni to'suvchi qatlam) */
+                    #modal-overlay {
+                        display: none; /* Avvaliga yashirin bo'ladi */
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        z-index: 999;
+                        cursor: pointer;
+                    }
+                    
+                
+                </style>
+                   <script>document.getElementById('schedule-link').addEventListener('click', function (e) {
+                    e.preventDefault(); // Havola yuklanishini oldini olish
+                    document.getElementById('calendar-modal').style.display = 'block';
+                    document.getElementById('modal-overlay').style.display = 'block';
+                });
+                
+                document.getElementById('close-modal').addEventListener('click', function () {
+                    document.getElementById('calendar-modal').style.display = 'none';
+                    document.getElementById('modal-overlay').style.display = 'none';
+                });
+                
+                document.getElementById('modal-overlay').addEventListener('click', function () {
+                    document.getElementById('calendar-modal').style.display = 'none';
+                    document.getElementById('modal-overlay').style.display = 'none';
+                });
+                </script>                      
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -114,10 +209,10 @@ https://templatemo.com/tm-591-villa-agency
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="{% static "js/isotope.min.js" %}"></script>
+  <script src="{% static 'js/isotope.min.js' %}"></script>
   <script src="{% static 'js/owl-carousel.js' %}"></script>
-  <script src="{% static "js/counter.js" %}"></script>
-  <script src="{% static "js/custom.js" %}"></script>
+  <script src="{% static 'js/counter.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
 
   </body>
 </html>

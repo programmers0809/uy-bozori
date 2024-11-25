@@ -55,12 +55,26 @@
 
       <div class="row">
         <div class="col-lg-12">
-          <ul class="pagination">
-            <li><a href="#">1</a></li>
-            <li><a class="is_active" href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">>></a></li>
-          </ul>
+    <ul class="pagination">
+
+    <li>
+      <a href="#" id="refresh-button">
+        <i class="fas fa-sync-alt"></i>
+        
+      </a>
+    </li>
+    
+</ul>
+
+<script>
+    // "yangilash" tugmasi uchun hodisani o'rnatish
+    document.getElementById('refresh-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Standart havola xatti-harakatini to'xtatish
+        location.reload(); // Sahifani qayta yuklash
+    });
+</script>
+
+        
         </div>
       </div>
     </div>

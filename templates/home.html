@@ -7,26 +7,36 @@
 
   <div class="main-banner">
     <div class="owl-carousel owl-banner">
-      <div class="item item-1">
-        <div class="header-text">
-          <span class="category">Toronto, <em>Canada</em></span>
-          <h2>Hurry!<br>Get the Best Villa for you</h2>
-        </div>
+      {% for item in carousel_items %}
+      <div class="item" style="background-image: url('{{ item.background_image.url }}')">
+          <div class="header-text">
+              <span class="category">{{ item.location }}, <em>{{ item.category }}</em></span>
+              <h2>{{ item.urgency_text }}<br>{{ item.description }}</h2>
+          </div>
       </div>
-      <div class="item item-2">
-        <div class="header-text">
-          <span class="category">Melbourne, <em>Australia</em></span>
-          <h2>Be Quick!<br>Get the best villa in town</h2>
-        </div>
-      </div>
-      <div class="item item-3">
-        <div class="header-text">
-          <span class="category">Miami, <em>South Florida</em></span>
-          <h2>Act Now!<br>Get the highest level penthouse</h2>
-        </div>
-      </div>
-    </div>
+      {% endfor %}
   </div>
+  <style>
+    .owl-banner .item {
+    background-size: cover;  /* Ensures the image covers the container */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat; /* Prevents image tiling */
+    height: 500px;  /* Set a fixed height for the carousel */
+}
+
+@media (min-width: 768px) {
+    .owl-banner .item {
+        height: 600px;  /* Adjust height for larger screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .owl-banner .item {
+        height: 700px;  /* Adjust height for even larger screens */
+    }
+}
+
+  </style>
 
   <div class="featured section">
     <div class="container">
@@ -275,126 +285,38 @@
 
   <div class="properties section">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-4 offset-lg-4">
-          <div class="section-heading text-center">
-            <h6>| Properties</h6>
-            <h2>We Provide The Best Property You Like</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-01.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$2.264.000</h6>
-            <h4><a href="property-details.html">18 New Street Miami, OR 97219</a></h4>
-            <ul>
-              <li>Bedrooms: <span>8</span></li>
-              <li>Bathrooms: <span>8</span></li>
-              <li>Area: <span>545m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>6 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <div class="section-heading text-center">
+                    <h6>| Properties</h6>
+                    <h2>We Provide The Best Property You Like</h2>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-02.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$1.180.000</h6>
-            <h4><a href="property-details.html">54 Mid Street Florida, OR 27001</a></h4>
-            <ul>
-              <li>Bedrooms: <span>6</span></li>
-              <li>Bathrooms: <span>5</span></li>
-              <li>Area: <span>450m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>8 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
+        <div class="row">
+            {% for property in all_house_list %}
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items {{ property.category|slugify }}">
+                <div class="item">
+                    <a href="#"><img src="{{ property.image.url }}" alt=""></a>
+                    <span class="category">{{ property.category }}</span>
+                    <h6>{{property.price_type}}{{ property.price }}</h6>
+                    <h4>{{ property.address }}</h4>
+                    <ul>
+                        <li>Area: <span>{{ property.area }}m²</span></li>
+                        <li>Floor: <span>{{ property.floor }}</span></li>
+                        <li>Parking: <span>{{ property.parking }}</span></li>
+                    </ul>
+                    <div class="main-button">
+                        <a href="#">Schedule a visit</a>
+                    </div>
+                </div>
             </div>
-          </div>
+            {% endfor %}
         </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-03.jpg" alt=""></a>
-            <span class="category">Luxury Villa</span>
-            <h6>$1.460.000</h6>
-            <h4><a href="property-details.html">26 Old Street Miami, OR 38540</a></h4>
-            <ul>
-              <li>Bedrooms: <span>5</span></li>
-              <li>Bathrooms: <span>4</span></li>
-              <li>Area: <span>225m2</span></li>
-              <li>Floor: <span>3</span></li>
-              <li>Parking: <span>10 spots</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-04.jpg" alt=""></a>
-            <span class="category">Apartment</span>
-            <h6>$584.500</h6>
-            <h4><a href="property-details.html">12 New Street Miami, OR 12650</a></h4>
-            <ul>
-              <li>Bedrooms: <span>4</span></li>
-              <li>Bathrooms: <span>3</span></li>
-              <li>Area: <span>125m2</span></li>
-              <li>Floor: <span>25th</span></li>
-              <li>Parking: <span>2 cars</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-05.jpg" alt=""></a>
-            <span class="category">Penthouse</span>
-            <h6>$925.600</h6>
-            <h4><a href="property-details.html">34 Beach Street Miami, OR 42680</a></h4>
-            <ul>
-              <li>Bedrooms: <span>4</span></li>
-              <li>Bathrooms: <span>4</span></li>
-              <li>Area: <span>180m2</span></li>
-              <li>Floor: <span>38th</span></li>
-              <li>Parking: <span>2 cars</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="item">
-            <a href="property-details.html"><img src="assets/images/property-06.jpg" alt=""></a>
-            <span class="category">Modern Condo</span>
-            <h6>$450.000</h6>
-            <h4><a href="property-details.html">22 New Street Portland, OR 16540</a></h4>
-            <ul>
-              <li>Bedrooms: <span>3</span></li>
-              <li>Bathrooms: <span>2</span></li>
-              <li>Area: <span>165m2</span></li>
-              <li>Floor: <span>26th</span></li>
-              <li>Parking: <span>3 cars</span></li>
-            </ul>
-            <div class="main-button">
-              <a href="property-details.html">Schedule a visit</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<!--  -->
 
   <div class="contact section">
     <div class="container">
@@ -414,22 +336,32 @@
       <div class="row">
         <div class="col-lg-7">
           <div id="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="500px" frameborder="0" style="border:0; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);" allowfullscreen=""></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d342698.01595342894!2d69.24107309356198!3d41.29949568416899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x38aef78cf2487adf%3A0x5f2e2222cbcdcdab!2sTashkent!5e1!3m2!1sen!2s!4v1699032564182!5m2!1sen!2s" width="100%" height="500px" frameborder="0" style="border:0; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);" allowfullscreen=""></iframe>
+
           </div>
           <div class="row">
             <div class="col-lg-6">
-              <div class="item phone">
-                <img src="assets/images/phone-icon.png" alt="" style="max-width: 52px;">
-                <h6>010-020-0340<br><span>Phone Number</span></h6>
-              </div>
+                <div class="item phone">
+                    {% if contact_info.phone_icon %}
+                        <img src="{{ contact_info.phone_icon.url }}" alt="" style="max-width: 52px;">
+                    {% else %}
+                        <img src="assets/images/phone-icon.png" alt="" style="max-width: 52px;">
+                    {% endif %}
+                    <h6>{{ contact_info.phone_number }}<br><span>Phone Number</span></h6>
+                </div>
             </div>
             <div class="col-lg-6">
-              <div class="item email">
-                <img src="assets/images/email-icon.png" alt="" style="max-width: 52px;">
-                <h6>info@villa.co<br><span>Business Email</span></h6>
-              </div>
+                <div class="item email">
+                    {% if contact_info.email_icon %}
+                        <img src="{{ contact_info.email_icon.url }}" alt="" style="max-width: 52px;">
+                    {% else %}
+                        <img src="assets/images/email-icon.png" alt="" style="max-width: 52px;">
+                    {% endif %}
+                    <h6>{{ contact_info.email }}<br><span>Business Email</span></h6>
+                </div>
             </div>
-          </div>
+        </div>
+        
         </div>
         <div class="col-lg-5">
           <form id="contact-form" action="" method="post">
