@@ -94,3 +94,17 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"Contact Info: {self.phone_number}, {self.email}"
+
+
+
+
+
+class Contoct(models.Model):
+    name = models.CharField(max_length=100)  # To'liq ism
+    email = models.EmailField()             # Elektron pochta manzili
+    subject = models.CharField(max_length=200, blank=True)  # Mavzu (ixtiyoriy)
+    message = models.TextField()            # Xabar matni
+    created_at = models.DateTimeField(auto_now_add=True)  # Yaratilgan vaqt
+
+    def __str__(self):
+        return f"{self.name} - {self.subject}"
